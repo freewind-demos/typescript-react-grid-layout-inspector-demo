@@ -12,19 +12,28 @@ export default function Hello() {
     {i: 'c', x: 4, y: 0, w: 1, h: 2},
   ]);
 
-  function updateLayout(event: ChangeEvent<HTMLTextAreaElement>) {
+  function updateLayouts(event: ChangeEvent<HTMLTextAreaElement>) {
     const content = event.target.value;
     setLayouts(JSON.parse(content));
+  }
+
+  function findLayout(layoutKey: string): Layout {
+    return layouts.find(it => it.i === layoutKey)!;
+  }
+
+  function updateLayout(layout: Layout): void {
+    const newLayouts = layouts.map(it => it.i === layout.i ? layout : it)
+    setLayouts(newLayouts);
   }
 
   return <div>
     <h1>Hello React</h1>
     <GridLayout className='layout' preventCollision={true} layout={layouts} cols={12} rowHeight={30} width={1200}
                 onLayoutChange={setLayouts}>
-      <div key='a'>A<LayoutInspector layouts={layouts} layoutKey='a' setLayouts={setLayouts}/></div>
-      <div key='b'>B<LayoutInspector layouts={layouts} layoutKey='b' setLayouts={setLayouts}/></div>
-      <div key='c'>C<LayoutInspector layouts={layouts} layoutKey='c' setLayouts={setLayouts}/></div>
+      <div key='a'>A<LayoutInspector layout={findLayout('a')} updateLayout={updateLayout}/></div>
+      <div key='b'>B<LayoutInspector layout={findLayout('b')} updateLayout={updateLayout}/></div>
+      <div key='c'>C<LayoutInspector layout={findLayout('c')} updateLayout={updateLayout}/></div>
     </GridLayout>
-    <textarea className='editor' onChange={updateLayout} value={JSON.stringify(layouts, null, 4)}/>
+    <textarea className='editor' onChange={updateLayouts} value={JSON.stringify(layouts, null, 4)}/>
   </div>
 };

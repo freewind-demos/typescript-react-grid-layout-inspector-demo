@@ -4,46 +4,36 @@ import React, {useState} from 'react';
 import './LayoutInspector.pcss';
 
 type LayoutInspectorProps = {
-  layouts: Layout[],
-  setLayouts: (layouts: Layout[]) => void,
-  layoutKey: string,
+  layout: Layout,
+  updateLayout: (layout: Layout) => void,
 }
 
-export default function LayoutInspector({layouts, layoutKey, setLayouts}: LayoutInspectorProps) {
-
-  const layout = layouts.find(it => it.i === layoutKey)!
-
-  function updateLayouts(layout: Layout) {
-    const newLayouts = layouts.map(it => it.i === layout.i ? layout : it)
-    setLayouts(newLayouts);
-  }
+export default function LayoutInspector({layout, updateLayout}: LayoutInspectorProps) {
 
   return layout
     ? <div className='LayoutInspector'>
-      <span className='row'>x
-        <input type="number" value={layout.x.toString()}
-               onChange={event => {
-                 updateLayouts({...layout, x: parseInt(event.target.value)})
-               }}/>
-      </span>
-      <span className='row'>y
-        <input type="number" value={layout.y.toString()}
-               onChange={event => {
-                 updateLayouts({...layout, y: parseInt(event.target.value)})
-               }}/>
-      </span>
-      <span className='row'>w
-        <input type="number" value={layout.w.toString()}
-               onChange={event => {
-                 updateLayouts({...layout, w: parseInt(event.target.value)})
-               }}/>
-      </span>
-      <span className='row'>h
-        <input type="number" value={layout.h.toString()}
-               onChange={event => {
-                 updateLayouts({...layout, h: parseInt(event.target.value)})
-               }}/>
-      </span>
+      <ul>
+        <li className='row'>
+          <button type='button' onClick={() => updateLayout({...layout, x: layout.x - 1})}>-</button>
+          <span className='label'>x: {layout.x}</span>
+          <button type='button' onClick={() => updateLayout({...layout, x: layout.x + 1})}>+</button>
+        </li>
+        <li className='row'>
+          <button type='button' onClick={() => updateLayout({...layout, y: layout.y - 1})}>-</button>
+          <span className='label'>y: {layout.y}</span>
+          <button type='button' onClick={() => updateLayout({...layout, y: layout.y + 1})}>+</button>
+        </li>
+        <li className='row'>
+          <button type='button' onClick={() => updateLayout({...layout, w: layout.w - 1})}>-</button>
+          <span className='label'>width: {layout.w}</span>
+          <button type='button' onClick={() => updateLayout({...layout, w: layout.w + 1})}>+</button>
+        </li>
+        <li className='row'>
+          <button type='button' onClick={() => updateLayout({...layout, h: layout.h - 1})}>-</button>
+          <span className='label'>height: {layout.h}</span>
+          <button type='button' onClick={() => updateLayout({...layout, h: layout.h + 1})}>+</button>
+        </li>
+      </ul>
     </div>
     : null;
 }
