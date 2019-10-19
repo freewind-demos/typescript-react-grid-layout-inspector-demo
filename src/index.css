@@ -1,3 +1,8 @@
 .react-grid-item {
   background-color: #DDDDDD;
 }
+
+.editor {
+  width: 600px;
+  height: 300px;
+}

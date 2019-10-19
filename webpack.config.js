@@ -23,6 +23,12 @@ module.exports = {
         {loader: 'style-loader'},
         {loader: 'css-loader'}
       ]
+    }, {
+      test: /\.pcss$/,
+      use: [
+        {loader: 'style-loader'},
+        {loader: 'postcss-loader'}
+      ]
     }]
   },
   plugins: [

@@ -1,0 +1,24 @@
+.LayoutInspector {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+
+  .row {
+    input {
+      width: 50px;
+    }
+  }
+
+  &:hover {
+    display: block;
+  }
+}
+
+*:hover > .LayoutInspector {
+  display: block;
+}
+
+
+
