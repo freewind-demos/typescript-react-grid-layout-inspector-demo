@@ -1,9 +1,10 @@
 .LayoutInspector {
   display: none;
   position: absolute;
-  top: -65px;
+  top: -75px;
   left: 0;
-  height: 66px;
+  width: 104px;
+  height: 76px;
   font-size: 12px;
   line-height: 12px;
 
@@ -14,7 +15,15 @@
 
     li {
       background: white;
-      .label {
+
+      &.layoutKey {
+        text-align: center;
+        background-color: #EEEEEE;
+        line-height: 15px;
+        white-space: nowrap;
+      }
+
+      .property {
         display: inline-block;
         width: 80px;
         text-align: center;
@@ -31,12 +40,6 @@
           color: red;
         }
       }
-    }
-  }
-
-  .row {
-    input {
-      width: 30px;
     }
   }
 
