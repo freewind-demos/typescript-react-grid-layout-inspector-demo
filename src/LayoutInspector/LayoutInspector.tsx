@@ -11,7 +11,7 @@ type LayoutInspectorProps = {
 export default function LayoutInspector({layout, updateLayout}: LayoutInspectorProps) {
 
   return layout
-    ? <div className='LayoutInspector'>
+    ? <div className='layoutInspector'>
       <ul>
         <li className={'layoutKey'}>{layout.i}</li>
         <li>
